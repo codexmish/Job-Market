@@ -1,7 +1,9 @@
-import { Briefcase } from "@gravity-ui/icons";
-import { ChartAreaStacked } from "@gravity-ui/icons";
-import { FolderMagnifier } from "@gravity-ui/icons";
-import { Star } from "@gravity-ui/icons";
+import {
+  Briefcase,
+  ChartAreaStacked,
+  FolderMagnifier,
+  Star,
+} from "@gravity-ui/icons";
 
 interface metricsDataI {
   id: number;
