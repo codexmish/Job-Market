@@ -1,2 +1,17 @@
+/* -------font link */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 @import "tailwindcss";
 @import "@heroui/styles";
+
+
+@theme {
+  /* ---Fonts */
+  --font-inter: "Inter", sans-serif;
+
+  /* ---Colors */
+  --color-blackText: #141414;
+  --color-primary: #5C53FE;
+  /* --text-whitetext: #F8FAFC; */
+  /* --color-border: #E5E7EB; */
+}
