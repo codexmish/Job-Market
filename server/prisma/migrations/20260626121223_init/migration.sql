@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "user" ADD COLUMN     "otp" TEXT NOT NULL DEFAULT '',
+ALTER COLUMN "activeStatus" SET DEFAULT 'BLOCKED';

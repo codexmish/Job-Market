@@ -23,6 +23,12 @@ const signup = async (req: Request, res: Response) => {
   }
 };
 
+// ------otp verify
+const otpVerify = async (req: Request, res: Response) => {
+  
+};
+
 export const authController = {
   signup,
+  otpVerify,
 };

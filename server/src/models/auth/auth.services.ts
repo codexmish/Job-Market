@@ -77,6 +77,15 @@ const signup = async (payload: SignupData) => {
   return user
 };
 
+
+const otpVerify = async () => {
+  
+};
+
+
+
+
 export const authServices = {
   signup,
+  otpVerify
 };
