@@ -5,6 +5,18 @@ CREATE TYPE "ActiveStatus" AS ENUM ('ACTIVE', 'BLOCKED');
 CREATE TYPE "Role" AS ENUM ('USER', 'ADMIN', 'AUTHOR');
 
 -- CreateTable
+CREATE TABLE "profile" (
+    "id" TEXT NOT NULL,
+    "profilePhoto" TEXT,
+    "bio" TEXT,
+    "userId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "profile_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "user" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
@@ -19,4 +31,10 @@ CREATE TABLE "user" (
 );
 
 -- CreateIndex
+CREATE UNIQUE INDEX "profile_userId_key" ON "profile"("userId");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "user_email_key" ON "user"("email");
+
+-- AddForeignKey
+ALTER TABLE "profile" ADD CONSTRAINT "profile_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
