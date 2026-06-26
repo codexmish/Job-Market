@@ -111,7 +111,7 @@ export default function Navbar() {
               <li className="h-[1px] bg-neutral-800/60 my-2" />
               <li>
                 <Link
-                  href="/login"
+                  href="/signin"
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
                   className="block w-full text-[#5651ef] hover:text-[#6c67ff] text-base py-2.5 px-3 font-medium"
                 >
