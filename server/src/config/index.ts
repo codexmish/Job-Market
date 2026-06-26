@@ -7,4 +7,5 @@ export default {
   port: process.env.PORT || 8000,
   database_url: process.env.DATABASE_URL,
   app_url: process.env.APP_URL,
+  salt_round: process.env.SALT_ROUND
 };
