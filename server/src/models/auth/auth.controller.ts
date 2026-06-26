@@ -25,7 +25,22 @@ const signup = async (req: Request, res: Response) => {
 
 // ------otp verify
 const otpVerify = async (req: Request, res: Response) => {
-  
+  try {
+    const result = await authServices.otpVerify(req.body);
+
+    sendRes(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "OTP verified successfully",
+      data: result,
+    });
+  } catch (error: any) {
+    sendRes(res, {
+      statusCode: httpStatus.INTERNAL_SERVER_ERROR,
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 export const authController = {

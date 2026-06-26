@@ -1,7 +1,7 @@
 import config from "../../config";
 import { utils } from "../../helpers/utils";
 import { prisma } from "../../lib/prisma";
-import { SignupData } from "./auth.interface";
+import { SignupData, VerifyOTP } from "./auth.interface";
 import bcrypt from "bcrypt";
 
 // ------register services
@@ -45,12 +45,16 @@ const signup = async (payload: SignupData) => {
   // -----hash password
   const hashedPass = await bcrypt.hash(password, Number(config.salt_round));
 
+  //  otp generate
+  const otp = utils.generateOTP();
+
   //   --------create user
   const createdUser = await prisma.user.create({
     data: {
       name,
       email,
       password: hashedPass,
+      otp,
       profile: {
         create: {
           profilePhoto,
@@ -58,10 +62,8 @@ const signup = async (payload: SignupData) => {
       },
     },
   });
- 
 
-
-//   -------returning user data
+  //   -------returning user data
   const user = await prisma.user.findUnique({
     where: {
       id: createdUser.id,
@@ -74,18 +76,41 @@ const signup = async (payload: SignupData) => {
     },
   });
 
-  return user
+  return user;
 };
 
+const otpVerify = async (payload: VerifyOTP) => {
+  const { email, otp } = payload;
 
-const otpVerify = async () => {
-  
+  // ---email validatine
+  if (!email) {
+    throw new Error("Email is required");
+  }
+
+  if (!utils.isValidateEmail(email)) {
+    throw new Error("Email not valid");
+  }
+
+  const verifiedUser = prisma.user.update({
+    where: {
+      email,
+      otp,
+    },
+    data: {
+      activeStatus: "ACTIVE",
+      otp: "",
+    },
+  });
+
+
+  if(!verifiedUser){
+    throw new Error("Something bad");
+  }
+
+  return verifiedUser
 };
-
-
-
 
 export const authServices = {
   signup,
-  otpVerify
+  otpVerify,
 };

@@ -4,3 +4,8 @@ export interface SignupData {
   password: string;
   profilePhoto: string;
 }
+
+export interface VerifyOTP {
+  email: string;
+  otp: string;
+}
