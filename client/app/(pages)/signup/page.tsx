@@ -16,14 +16,14 @@ const page = () => {
 
   // -----error
   const [allError, setAllError] = useState({
-    fullnameError: "border-[#d1d5db]",
+    nameError: "border-[#d1d5db]",
     emailError: "border-[#d1d5db]",
     passwordError: "border-[#d1d5db]",
   });
 
   // ---form data
   const [formData, setFormData] = useState({
-    fullname: "",
+    name: "",
     email: "",
     password: "",
   });
@@ -36,10 +36,10 @@ const page = () => {
 
     // validation
 
-    if (!formData.fullname || formData.fullname === "") {
-      setAllError((prev) => ({ ...prev, fullnameError: "border-red-500" }));
+    if (!formData.name || formData.name === "") {
+      setAllError((prev) => ({ ...prev, nameError: "border-red-500" }));
     } else {
-      setAllError((prev) => ({ ...prev, fullnameError: "border-[#d1d5db]" }));
+      setAllError((prev) => ({ ...prev, nameError: "border-[#d1d5db]" }));
     }
 
     if (
@@ -63,7 +63,7 @@ const page = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:8000/user/signup", {
+      const res = await fetch("http://localhost:8000/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -75,7 +75,7 @@ const page = () => {
 
       if (data.success == true) {
         showToast(data.message, "success");
-        router.push(`/otp-verify?email=${formData.email}`);
+        // router.push(`/otp-verify?email=${formData.email}`);\
       } else {
         showToast(data.message, "error");
       }
@@ -111,10 +111,10 @@ const page = () => {
               {/* ------fullname input */}
               <FormInput
                 onchange={handleOnChange}
-                name="fullname"
+                name="name"
                 label="Full Name"
-                placeholder="Enter Your FullName"
-                errBorder={allError.fullnameError}
+                placeholder="Enter Your Name"
+                errBorder={allError.nameError}
               />
               {/* ------email input */}
               <FormInput

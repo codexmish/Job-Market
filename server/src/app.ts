@@ -10,7 +10,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: config.app_url,
+    origin: "http://localhost:3000",
+    credentials: true,
   }),
 );
 
@@ -19,6 +20,5 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use("/auth", authRouter);
-
 
 export default app;
